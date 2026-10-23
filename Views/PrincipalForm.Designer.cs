@@ -31,17 +31,17 @@
             this.components = new System.ComponentModel.Container();
             this.pnlMapa = new System.Windows.Forms.Panel();
             this.pnlCamadas = new System.Windows.Forms.Panel();
-            this.checkBox9 = new System.Windows.Forms.CheckBox();
-            this.checkBox8 = new System.Windows.Forms.CheckBox();
-            this.checkBox7 = new System.Windows.Forms.CheckBox();
-            this.checkBox6 = new System.Windows.Forms.CheckBox();
+            this.chkStatusDefault = new System.Windows.Forms.CheckBox();
+            this.chkStatusAtribuido = new System.Windows.Forms.CheckBox();
+            this.chkStatusReconhecido = new System.Windows.Forms.CheckBox();
+            this.chkStatusNaoReconhecido = new System.Windows.Forms.CheckBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.checkBox5 = new System.Windows.Forms.CheckBox();
-            this.checkBox3 = new System.Windows.Forms.CheckBox();
+            this.chkIncidentesMedico = new System.Windows.Forms.CheckBox();
+            this.chkIncidentesCrime = new System.Windows.Forms.CheckBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.checkBox4 = new System.Windows.Forms.CheckBox();
-            this.checkBox2 = new System.Windows.Forms.CheckBox();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.chkIncidentesIncendio = new System.Windows.Forms.CheckBox();
+            this.chkCamadaEstacao = new System.Windows.Forms.CheckBox();
+            this.chkCamadaIncidente = new System.Windows.Forms.CheckBox();
             this.label1 = new System.Windows.Forms.Label();
             this.picMapa = new System.Windows.Forms.PictureBox();
             this.panel1 = new System.Windows.Forms.Panel();
@@ -78,66 +78,74 @@
             // 
             // pnlCamadas
             // 
-            this.pnlCamadas.Controls.Add(this.checkBox9);
-            this.pnlCamadas.Controls.Add(this.checkBox8);
-            this.pnlCamadas.Controls.Add(this.checkBox7);
-            this.pnlCamadas.Controls.Add(this.checkBox6);
+            this.pnlCamadas.Controls.Add(this.chkStatusDefault);
+            this.pnlCamadas.Controls.Add(this.chkStatusAtribuido);
+            this.pnlCamadas.Controls.Add(this.chkStatusReconhecido);
+            this.pnlCamadas.Controls.Add(this.chkStatusNaoReconhecido);
             this.pnlCamadas.Controls.Add(this.label3);
-            this.pnlCamadas.Controls.Add(this.checkBox5);
-            this.pnlCamadas.Controls.Add(this.checkBox3);
+            this.pnlCamadas.Controls.Add(this.chkIncidentesMedico);
+            this.pnlCamadas.Controls.Add(this.chkIncidentesCrime);
             this.pnlCamadas.Controls.Add(this.label2);
-            this.pnlCamadas.Controls.Add(this.checkBox4);
-            this.pnlCamadas.Controls.Add(this.checkBox2);
-            this.pnlCamadas.Controls.Add(this.checkBox1);
+            this.pnlCamadas.Controls.Add(this.chkIncidentesIncendio);
+            this.pnlCamadas.Controls.Add(this.chkCamadaEstacao);
+            this.pnlCamadas.Controls.Add(this.chkCamadaIncidente);
             this.pnlCamadas.Controls.Add(this.label1);
-            this.pnlCamadas.Location = new System.Drawing.Point(1417, 53);
+            this.pnlCamadas.Location = new System.Drawing.Point(1417, 3);
             this.pnlCamadas.Name = "pnlCamadas";
             this.pnlCamadas.Size = new System.Drawing.Size(317, 714);
             this.pnlCamadas.TabIndex = 1;
             // 
-            // checkBox9
+            // chkStatusDefault
             // 
-            this.checkBox9.AutoSize = true;
-            this.checkBox9.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkBox9.Location = new System.Drawing.Point(9, 566);
-            this.checkBox9.Name = "checkBox9";
-            this.checkBox9.Size = new System.Drawing.Size(57, 35);
-            this.checkBox9.TabIndex = 12;
-            this.checkBox9.Text = "...";
-            this.checkBox9.UseVisualStyleBackColor = true;
+            this.chkStatusDefault.AutoSize = true;
+            this.chkStatusDefault.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chkStatusDefault.Location = new System.Drawing.Point(9, 566);
+            this.chkStatusDefault.Name = "chkStatusDefault";
+            this.chkStatusDefault.Size = new System.Drawing.Size(57, 35);
+            this.chkStatusDefault.TabIndex = 12;
+            this.chkStatusDefault.Text = "...";
+            this.chkStatusDefault.UseVisualStyleBackColor = true;
+            this.chkStatusDefault.CheckedChanged += new System.EventHandler(this.Filter_CheckedChanged);
             // 
-            // checkBox8
+            // chkStatusAtribuido
             // 
-            this.checkBox8.AutoSize = true;
-            this.checkBox8.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkBox8.Location = new System.Drawing.Point(9, 525);
-            this.checkBox8.Name = "checkBox8";
-            this.checkBox8.Size = new System.Drawing.Size(140, 35);
-            this.checkBox8.TabIndex = 11;
-            this.checkBox8.Text = "Atribuído";
-            this.checkBox8.UseVisualStyleBackColor = true;
+            this.chkStatusAtribuido.AutoSize = true;
+            this.chkStatusAtribuido.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chkStatusAtribuido.Location = new System.Drawing.Point(9, 525);
+            this.chkStatusAtribuido.Name = "chkStatusAtribuido";
+            this.chkStatusAtribuido.Size = new System.Drawing.Size(140, 35);
+            this.chkStatusAtribuido.TabIndex = 11;
+            this.chkStatusAtribuido.Text = "Atribuído";
+            this.chkStatusAtribuido.UseVisualStyleBackColor = true;
+            this.chkStatusAtribuido.CheckedChanged += new System.EventHandler(this.Filter_CheckedChanged);
             // 
-            // checkBox7
+            // chkStatusReconhecido
             // 
-            this.checkBox7.AutoSize = true;
-            this.checkBox7.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkBox7.Location = new System.Drawing.Point(9, 484);
-            this.checkBox7.Name = "checkBox7";
-            this.checkBox7.Size = new System.Drawing.Size(192, 35);
-            this.checkBox7.TabIndex = 10;
-            this.checkBox7.Text = "Reconhecido";
-            this.checkBox7.UseVisualStyleBackColor = true;
+            this.chkStatusReconhecido.AutoSize = true;
+            this.chkStatusReconhecido.Checked = true;
+            this.chkStatusReconhecido.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkStatusReconhecido.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chkStatusReconhecido.Location = new System.Drawing.Point(9, 484);
+            this.chkStatusReconhecido.Name = "chkStatusReconhecido";
+            this.chkStatusReconhecido.Size = new System.Drawing.Size(192, 35);
+            this.chkStatusReconhecido.TabIndex = 10;
+            this.chkStatusReconhecido.Text = "Reconhecido";
+            this.chkStatusReconhecido.UseVisualStyleBackColor = true;
+            this.chkStatusReconhecido.CheckedChanged += new System.EventHandler(this.Filter_CheckedChanged);
             // 
-            // checkBox6
+            // chkStatusNaoReconhecido
             // 
-            this.checkBox6.AutoSize = true;
-            this.checkBox6.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkBox6.Location = new System.Drawing.Point(9, 443);
-            this.checkBox6.Name = "checkBox6";
-            this.checkBox6.Size = new System.Drawing.Size(238, 35);
-            this.checkBox6.TabIndex = 9;
-            this.checkBox6.Text = "Não reconhecido";
-            this.checkBox6.UseVisualStyleBackColor = true;
+            this.chkStatusNaoReconhecido.AutoSize = true;
+            this.chkStatusNaoReconhecido.Checked = true;
+            this.chkStatusNaoReconhecido.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkStatusNaoReconhecido.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chkStatusNaoReconhecido.Location = new System.Drawing.Point(9, 443);
+            this.chkStatusNaoReconhecido.Name = "chkStatusNaoReconhecido";
+            this.chkStatusNaoReconhecido.Size = new System.Drawing.Size(238, 35);
+            this.chkStatusNaoReconhecido.TabIndex = 9;
+            this.chkStatusNaoReconhecido.Text = "Não reconhecido";
+            this.chkStatusNaoReconhecido.UseVisualStyleBackColor = true;
+            this.chkStatusNaoReconhecido.CheckedChanged += new System.EventHandler(this.Filter_CheckedChanged);
             // 
             // label3
             // 
@@ -145,31 +153,37 @@
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.Location = new System.Drawing.Point(3, 397);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(139, 31);
+            this.label3.Size = new System.Drawing.Size(92, 31);
             this.label3.TabIndex = 8;
-            this.label3.Text = "Incidentes";
+            this.label3.Text = "Status";
             // 
-            // checkBox5
+            // chkIncidentesMedico
             // 
-            this.checkBox5.AutoSize = true;
-            this.checkBox5.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkBox5.Location = new System.Drawing.Point(9, 297);
-            this.checkBox5.Name = "checkBox5";
-            this.checkBox5.Size = new System.Drawing.Size(120, 35);
-            this.checkBox5.TabIndex = 7;
-            this.checkBox5.Text = "Médico";
-            this.checkBox5.UseVisualStyleBackColor = true;
+            this.chkIncidentesMedico.AutoSize = true;
+            this.chkIncidentesMedico.Checked = true;
+            this.chkIncidentesMedico.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkIncidentesMedico.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chkIncidentesMedico.Location = new System.Drawing.Point(9, 297);
+            this.chkIncidentesMedico.Name = "chkIncidentesMedico";
+            this.chkIncidentesMedico.Size = new System.Drawing.Size(120, 35);
+            this.chkIncidentesMedico.TabIndex = 7;
+            this.chkIncidentesMedico.Text = "Médico";
+            this.chkIncidentesMedico.UseVisualStyleBackColor = true;
+            this.chkIncidentesMedico.CheckedChanged += new System.EventHandler(this.Filter_CheckedChanged);
             // 
-            // checkBox3
+            // chkIncidentesCrime
             // 
-            this.checkBox3.AutoSize = true;
-            this.checkBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkBox3.Location = new System.Drawing.Point(9, 256);
-            this.checkBox3.Name = "checkBox3";
-            this.checkBox3.Size = new System.Drawing.Size(105, 35);
-            this.checkBox3.TabIndex = 6;
-            this.checkBox3.Text = "Crime";
-            this.checkBox3.UseVisualStyleBackColor = true;
+            this.chkIncidentesCrime.AutoSize = true;
+            this.chkIncidentesCrime.Checked = true;
+            this.chkIncidentesCrime.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkIncidentesCrime.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chkIncidentesCrime.Location = new System.Drawing.Point(9, 256);
+            this.chkIncidentesCrime.Name = "chkIncidentesCrime";
+            this.chkIncidentesCrime.Size = new System.Drawing.Size(105, 35);
+            this.chkIncidentesCrime.TabIndex = 6;
+            this.chkIncidentesCrime.Text = "Crime";
+            this.chkIncidentesCrime.UseVisualStyleBackColor = true;
+            this.chkIncidentesCrime.CheckedChanged += new System.EventHandler(this.Filter_CheckedChanged);
             // 
             // label2
             // 
@@ -181,38 +195,47 @@
             this.label2.TabIndex = 5;
             this.label2.Text = "Incidentes";
             // 
-            // checkBox4
+            // chkIncidentesIncendio
             // 
-            this.checkBox4.AutoSize = true;
-            this.checkBox4.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkBox4.Location = new System.Drawing.Point(9, 215);
-            this.checkBox4.Name = "checkBox4";
-            this.checkBox4.Size = new System.Drawing.Size(136, 35);
-            this.checkBox4.TabIndex = 4;
-            this.checkBox4.Text = "Incêndio";
-            this.checkBox4.UseVisualStyleBackColor = true;
+            this.chkIncidentesIncendio.AutoSize = true;
+            this.chkIncidentesIncendio.Checked = true;
+            this.chkIncidentesIncendio.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkIncidentesIncendio.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chkIncidentesIncendio.Location = new System.Drawing.Point(9, 215);
+            this.chkIncidentesIncendio.Name = "chkIncidentesIncendio";
+            this.chkIncidentesIncendio.Size = new System.Drawing.Size(136, 35);
+            this.chkIncidentesIncendio.TabIndex = 4;
+            this.chkIncidentesIncendio.Text = "Incêndio";
+            this.chkIncidentesIncendio.UseVisualStyleBackColor = true;
+            this.chkIncidentesIncendio.CheckedChanged += new System.EventHandler(this.Filter_CheckedChanged);
             // 
-            // checkBox2
+            // chkCamadaEstacao
             // 
-            this.checkBox2.AutoSize = true;
-            this.checkBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkBox2.Location = new System.Drawing.Point(9, 84);
-            this.checkBox2.Name = "checkBox2";
-            this.checkBox2.Size = new System.Drawing.Size(146, 35);
-            this.checkBox2.TabIndex = 2;
-            this.checkBox2.Text = "Estações";
-            this.checkBox2.UseVisualStyleBackColor = true;
+            this.chkCamadaEstacao.AutoSize = true;
+            this.chkCamadaEstacao.Checked = true;
+            this.chkCamadaEstacao.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkCamadaEstacao.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chkCamadaEstacao.Location = new System.Drawing.Point(9, 84);
+            this.chkCamadaEstacao.Name = "chkCamadaEstacao";
+            this.chkCamadaEstacao.Size = new System.Drawing.Size(146, 35);
+            this.chkCamadaEstacao.TabIndex = 2;
+            this.chkCamadaEstacao.Text = "Estações";
+            this.chkCamadaEstacao.UseVisualStyleBackColor = true;
+            this.chkCamadaEstacao.CheckedChanged += new System.EventHandler(this.Filter_CheckedChanged);
             // 
-            // checkBox1
+            // chkCamadaIncidente
             // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkBox1.Location = new System.Drawing.Point(9, 43);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(158, 35);
-            this.checkBox1.TabIndex = 1;
-            this.checkBox1.Text = "Incidentes";
-            this.checkBox1.UseVisualStyleBackColor = true;
+            this.chkCamadaIncidente.AutoSize = true;
+            this.chkCamadaIncidente.Checked = true;
+            this.chkCamadaIncidente.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkCamadaIncidente.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chkCamadaIncidente.Location = new System.Drawing.Point(9, 43);
+            this.chkCamadaIncidente.Name = "chkCamadaIncidente";
+            this.chkCamadaIncidente.Size = new System.Drawing.Size(158, 35);
+            this.chkCamadaIncidente.TabIndex = 1;
+            this.chkCamadaIncidente.Text = "Incidentes";
+            this.chkCamadaIncidente.UseVisualStyleBackColor = true;
+            this.chkCamadaIncidente.CheckedChanged += new System.EventHandler(this.Filter_CheckedChanged);
             // 
             // label1
             // 
@@ -234,6 +257,7 @@
             this.picMapa.TabIndex = 0;
             this.picMapa.TabStop = false;
             this.picMapa.Paint += new System.Windows.Forms.PaintEventHandler(this.picMapa_Paint);
+            this.picMapa.MouseClick += new System.Windows.Forms.MouseEventHandler(this.picMapa_MouseClick);
             // 
             // panel1
             // 
@@ -339,6 +363,7 @@
             // 
             // timerPiscada
             // 
+            this.timerPiscada.Enabled = true;
             this.timerPiscada.Interval = 500;
             this.timerPiscada.Tick += new System.EventHandler(this.timerPiscada_Tick);
             // 
@@ -381,18 +406,18 @@
         private System.Windows.Forms.ToolStripMenuItem tabelaToolStripMenuItem;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.PictureBox object_89736b10_0ca1_4338_a0cb_29df0ea92f76;
-        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.CheckBox chkCamadaIncidente;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.CheckBox checkBox9;
-        private System.Windows.Forms.CheckBox checkBox8;
-        private System.Windows.Forms.CheckBox checkBox7;
-        private System.Windows.Forms.CheckBox checkBox6;
+        private System.Windows.Forms.CheckBox chkStatusDefault;
+        private System.Windows.Forms.CheckBox chkStatusAtribuido;
+        private System.Windows.Forms.CheckBox chkStatusReconhecido;
+        private System.Windows.Forms.CheckBox chkStatusNaoReconhecido;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.CheckBox checkBox5;
-        private System.Windows.Forms.CheckBox checkBox3;
+        private System.Windows.Forms.CheckBox chkIncidentesMedico;
+        private System.Windows.Forms.CheckBox chkIncidentesCrime;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.CheckBox checkBox4;
-        private System.Windows.Forms.CheckBox checkBox2;
+        private System.Windows.Forms.CheckBox chkIncidentesIncendio;
+        private System.Windows.Forms.CheckBox chkCamadaEstacao;
         private System.Windows.Forms.Panel pnlTabela;
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.TextBox textBox1;

@@ -49,44 +49,14 @@ namespace MundialDESKTOP.V1.Views
 
         private void picMapa_Paint(object sender, PaintEventArgs e)
         {
-            // SE A API NÃO RESPONDEU NÃO DESENHA NADA, SÓ MOSTRA O MAPA
-            if (_estadoAtual == null || _estadoAtual.incidents == null) return;
 
-            // LEITURA DE CADA INCIDENTE RETORNADO PELA API, PARA DESENHAR NO MAPA
-            foreach (var inc in _estadoAtual.incidents)
-            {
-                // Define a cor base pelo tipo de incidente
-                Brush corTipo = Brushes.Red;
-                if (inc.type == "crime") corTipo = Brushes.Blue;
-                else if (inc.type == "medical") corTipo = Brushes.Orange;
+            if (_estadoAtual == null) return;
 
 
-                // SE NÃO FOR RECONHECIDO, APLICA A COR PISCANDO COM BRANCO
-                Brush corFinal = corTipo;
-                if (inc.status == "unacknowledged")
-                {
-                    corFinal = _estadoPiscada ? Brushes.White : corTipo;
-                }
+            // ESTAÇÕES DE EMERGÊNCIA
+            // FILTRO DE CAMADA: SÓ DESENHA SE CAMADAESTACOES ESTIVER MARCADO
 
-                // PEGA AS COORDENADAS X E Y E APLICA O RAIO PARA CENTRALIZAR
-                float x = (float)inc.location.x;
-                float y = (float)inc.location.y;
-                int raio = 30; // circulo de tamanho 24x24
-
-                // DESENHA O PREECHIMENTO DO CÍRCULO NO MAPA
-                e.Graphics.FillEllipse(corFinal, x - raio, y - raio, raio * 2, raio * 2);
-
-                // DESENHA A BORDA PRETA DO CIRCULO
-                e.Graphics.DrawEllipse(Pens.Black, x - raio, y - raio, raio * 2, raio * 2);
-
-                //DESENHA O ID DO INCIDENTE NO CENTRO DO MARCADOR
-                using (Font fonte = new Font("Arial", 12, FontStyle.Bold))
-                {
-                    e.Graphics.DrawString(inc.id, fonte, Brushes.Black, x - 6, y - 5);
-                }
-            }
-
-            if (_estadoAtual.stations != null)
+            if (_estadoAtual.stations != null && chkCamadaEstacao.Checked)
             {
                 foreach (var st in _estadoAtual.stations)
                 {
@@ -119,9 +89,62 @@ namespace MundialDESKTOP.V1.Views
                     }
                 }
             }
+            // FILTRO DE INCIDENTES: SÓ DESENHA SE CAMADAINCIDENTES ESTIVER MARCADO
+            if (_estadoAtual.incidents != null && chkCamadaIncidente.Checked)
+            {
+                // LEITURA DE CADA INCIDENTE RETORNADO PELA API, PARA DESENHAR NO MAPA
+                foreach (var inc in _estadoAtual.incidents)
+                {
+                    // FILTROS POR TIPO: SE O TIPO ESTIVER DESMARCADO NO PAINEL, PULA ELE
+                    if (inc.type.Equals("fire", StringComparison.OrdinalIgnoreCase) && !chkIncidentesIncendio.Checked) continue;
+                    if (inc.type.Equals("crime", StringComparison.OrdinalIgnoreCase) && !chkIncidentesCrime.Checked) continue;
+                    if (inc.type.Equals("medical", StringComparison.OrdinalIgnoreCase) && !chkIncidentesMedico.Checked) continue;
+                    if (inc.status.Equals("unacknowledged", StringComparison.OrdinalIgnoreCase) && !chkStatusNaoReconhecido.Checked) continue;
+                    if (inc.status.Equals("acknowledged", StringComparison.OrdinalIgnoreCase) && !chkStatusReconhecido.Checked) continue;
+                    if (inc.status.Equals("assigned", StringComparison.OrdinalIgnoreCase) && !chkStatusAtribuido.Checked) continue;
+                    if (inc.status.Equals("resolved", StringComparison.OrdinalIgnoreCase) && !chkStatusDefault.Checked) continue;
+
+                    // DESENHO DO INCIDENTE (SÓ CHEGA AQUI SE PASSOU POR TODOS OS FILTROS)
+                    Brush corTipo = Brushes.Red;
+                    if (inc.type.Equals("crime", StringComparison.OrdinalIgnoreCase)) corTipo = Brushes.Blue;
+                    else if (inc.type.Equals("medical", StringComparison.OrdinalIgnoreCase)) corTipo = Brushes.Orange;
+
+                    Brush corFinal = corTipo;
+                    bool naoReconhecido = inc.status.Equals("unacknowledged", StringComparison.OrdinalIgnoreCase);
+
+                    if (naoReconhecido)
+                    {
+                        corFinal = _estadoPiscada ? Brushes.White : corTipo; // alterna entre branco e a cor do tipo
+                    }
+
+                    float x = (float)inc.location.x;
+                    float y = (float)inc.location.y;
+                    int raio = 20;
+
+                    e.Graphics.FillEllipse(corFinal, x - raio, y - raio, raio * 2, raio * 2);
+                    e.Graphics.DrawEllipse(Pens.Black, x - raio, y - raio, raio * 2, raio * 2);
+
+                    using (Font font = new Font("Arial", 12, FontStyle.Bold))
+                    {
+                        SizeF tamanhoTexto = e.Graphics.MeasureString(inc.id, font);
+                        float textX = x - (tamanhoTexto.Width / 2);
+                        float textY = y - (tamanhoTexto.Height / 2);
+
+                        Brush corTexto = (naoReconhecido && _estadoPiscada) ? Brushes.Black : Brushes.White;
+                        e.Graphics.DrawString(inc.id, font, corTexto, textX, textY);
+                    }
+                }
+            }
         }
 
 
+
+
+        // CHAMA SEMPRE QUE QUALQUER UM DOS 9 CHECKBOX FOR CLICADO
+        private void Filter_CheckedChanged(object sender, EventArgs e)
+        {
+            picMapa.Invalidate();
+        }
 
 
 
@@ -153,5 +176,41 @@ namespace MundialDESKTOP.V1.Views
             pnlMapa.Visible = false;
 
         }
+
+        private void picMapa_MouseClick(object sender, MouseEventArgs e)
+        {
+
+            if (_estadoAtual == null || _estadoAtual.incidents == null || !chkCamadaIncidente.Checked) return;
+
+            int raio = 20;
+
+            foreach (var inc in _estadoAtual.incidents)
+            {
+                // FILTROS POR TIPO: SE O TIPO ESTIVER DESMARCADO NO PAINEL, PULA ELE
+                if (inc.type.Equals("fire", StringComparison.OrdinalIgnoreCase) && !chkIncidentesIncendio.Checked) continue;
+                if (inc.type.Equals("crime", StringComparison.OrdinalIgnoreCase) && !chkIncidentesCrime.Checked) continue;
+                if (inc.type.Equals("medical", StringComparison.OrdinalIgnoreCase) && !chkIncidentesMedico.Checked) continue;
+                if (inc.status.Equals("unacknowledged", StringComparison.OrdinalIgnoreCase) && !chkStatusNaoReconhecido.Checked) continue;
+                if (inc.status.Equals("acknowledged", StringComparison.OrdinalIgnoreCase) && !chkStatusReconhecido.Checked) continue;
+                if (inc.status.Equals("assigned", StringComparison.OrdinalIgnoreCase) && !chkStatusAtribuido.Checked) continue;
+                if (inc.status.Equals("resolved", StringComparison.OrdinalIgnoreCase) && !chkStatusDefault.Checked) continue;
+
+                double dx = e.X - inc.location.x;
+                double dy = e.Y - inc.location.y;
+                double distancia = Math.Sqrt(dx * dx + dy * dy);
+
+                if (distancia <= raio)
+                {
+                    AbrirDetalhes(inc);
+                    break;
+                }
+            }
+        }
+
+        private void AbrirDetalhes(Incident inc)
+        {
+            MessageBox.Show($"Boa, abriu detalhe certinho {inc.id}", "Sucesso", MessageBoxButtons.OK);
+        }
+
     }
 }
