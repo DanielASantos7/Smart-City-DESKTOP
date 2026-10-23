@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.pnlMapa = new System.Windows.Forms.Panel();
             this.pnlCamadas = new System.Windows.Forms.Panel();
             this.chkStatusDefault = new System.Windows.Forms.CheckBox();
@@ -60,6 +60,7 @@
             this.timerPiscada = new System.Windows.Forms.Timer(this.components);
             this.timerBusca = new System.Windows.Forms.Timer(this.components);
             this.lblRodaPe = new System.Windows.Forms.Label();
+            this.lblIndicadorConnection = new System.Windows.Forms.Label();
             this.pnlMapa.SuspendLayout();
             this.pnlCamadas.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picMapa)).BeginInit();
@@ -316,6 +317,7 @@
             // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.lblIndicadorConnection);
             this.panel2.Controls.Add(this.lblRodaPe);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panel2.Location = new System.Drawing.Point(0, 842);
@@ -347,23 +349,23 @@
             this.dgvIncidentes.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvIncidentes.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.dgvIncidentes.BackgroundColor = System.Drawing.SystemColors.ButtonFace;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvIncidentes.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvIncidentes.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvIncidentes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvIncidentes.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvIncidentes.DefaultCellStyle = dataGridViewCellStyle2;
             this.dgvIncidentes.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.dgvIncidentes.GridColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.dgvIncidentes.Location = new System.Drawing.Point(0, 191);
@@ -414,6 +416,16 @@
             this.lblRodaPe.Size = new System.Drawing.Size(93, 33);
             this.lblRodaPe.TabIndex = 0;
             this.lblRodaPe.Text = "label4";
+            // 
+            // lblIndicadorConnection
+            // 
+            this.lblIndicadorConnection.AutoSize = true;
+            this.lblIndicadorConnection.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblIndicadorConnection.Location = new System.Drawing.Point(1411, 39);
+            this.lblIndicadorConnection.Name = "lblIndicadorConnection";
+            this.lblIndicadorConnection.Size = new System.Drawing.Size(93, 33);
+            this.lblIndicadorConnection.TabIndex = 1;
+            this.lblIndicadorConnection.Text = "label4";
             // 
             // PrincipalForm
             // 
@@ -475,5 +487,6 @@
         private System.Windows.Forms.Timer timerPiscada;
         private System.Windows.Forms.Timer timerBusca;
         private System.Windows.Forms.Label lblRodaPe;
+        private System.Windows.Forms.Label lblIndicadorConnection;
     }
 }

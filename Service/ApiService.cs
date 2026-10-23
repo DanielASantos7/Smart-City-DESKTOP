@@ -14,7 +14,6 @@ namespace MundialDESKTOP.V1.Service
         public static readonly HttpClient Http = new HttpClient()
         {
             BaseAddress = new Uri("http://localhost:5215/"),
-            Timeout = TimeSpan.FromSeconds(10)
         };
 
         public static async Task<T> GetAsync<T>(string endpoint)

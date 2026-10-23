@@ -18,6 +18,8 @@ namespace MundialDESKTOP.V1.Views
             InitializeComponent();
             pnlMapa.BringToFront();
             pnlTabela.Visible = false;
+            lblIndicadorConnection.Visible = false;
+            lblRodaPe.Visible = false;
         }
 
         private async void PrincipalForm_Load(object sender, EventArgs e)
@@ -28,13 +30,36 @@ namespace MundialDESKTOP.V1.Views
 
         private async Task CarregarDadosAsync()
         {
-            _estadoAtual = await ApiService.GetAsync<StateResponse>("api/state");
-
-
-            if (_estadoAtual != null)
+            try
             {
-                picMapa.Invalidate();
-                AtualizarTabelaIncidentes();
+                _estadoAtual = await ApiService.GetAsync<StateResponse>("api/state");
+
+
+                if (_estadoAtual != null)
+                {
+                    lblIndicadorConnection.Text = "• Conectado";
+                    lblIndicadorConnection.ForeColor = Color.Green;
+                    picMapa.Invalidate();
+                    lblIndicadorConnection.Visible = true;
+                    lblRodaPe.Visible = true;
+                    AtualizarTabelaIncidentes();
+                    AutalizarRodape();
+                }
+                else
+                {
+                    lblIndicadorConnection.Visible = true;
+                    lblRodaPe.Visible = true;
+                    lblIndicadorConnection.Text = "• Conectando...";
+                    lblIndicadorConnection.ForeColor = Color.DarkOrange;
+                    AutalizarRodape();
+                }
+            }
+            catch
+            {
+                lblIndicadorConnection.Visible = true;
+                lblRodaPe.Visible = true;
+                lblIndicadorConnection.Text = "• Desconectado...";
+                lblIndicadorConnection.ForeColor = Color.Red;
                 AutalizarRodape();
             }
         }
@@ -158,7 +183,11 @@ namespace MundialDESKTOP.V1.Views
 
         private void AutalizarRodape()
         {
-            if (_estadoAtual?.incidents == null) return;
+            if (_estadoAtual?.incidents == null)
+            {
+                lblRodaPe.Text = "-";
+                return;
+            }
             var incs = _estadoAtual.incidents;
             int total = incs.Count();
             var naoRec = incs.Count(i => i.status.Equals("unacknowledged", StringComparison.OrdinalIgnoreCase));
