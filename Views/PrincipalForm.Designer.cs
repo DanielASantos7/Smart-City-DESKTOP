@@ -29,6 +29,8 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.pnlMapa = new System.Windows.Forms.Panel();
             this.pnlCamadas = new System.Windows.Forms.Panel();
             this.chkStatusDefault = new System.Windows.Forms.CheckBox();
@@ -52,18 +54,21 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.object_89736b10_0ca1_4338_a0cb_29df0ea92f76 = new System.Windows.Forms.PictureBox();
             this.pnlTabela = new System.Windows.Forms.Panel();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.dgvIncidentes = new System.Windows.Forms.DataGridView();
+            this.txtPesquisa = new System.Windows.Forms.TextBox();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.timerPiscada = new System.Windows.Forms.Timer(this.components);
+            this.timerBusca = new System.Windows.Forms.Timer(this.components);
+            this.lblRodaPe = new System.Windows.Forms.Label();
             this.pnlMapa.SuspendLayout();
             this.pnlCamadas.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picMapa)).BeginInit();
             this.panel1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
+            this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.object_89736b10_0ca1_4338_a0cb_29df0ea92f76)).BeginInit();
             this.pnlTabela.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvIncidentes)).BeginInit();
             this.SuspendLayout();
             // 
             // pnlMapa
@@ -311,6 +316,7 @@
             // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.lblRodaPe);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panel2.Location = new System.Drawing.Point(0, 842);
             this.panel2.Name = "panel2";
@@ -327,33 +333,59 @@
             // 
             // pnlTabela
             // 
-            this.pnlTabela.Controls.Add(this.dataGridView1);
-            this.pnlTabela.Controls.Add(this.textBox1);
+            this.pnlTabela.Controls.Add(this.dgvIncidentes);
+            this.pnlTabela.Controls.Add(this.txtPesquisa);
             this.pnlTabela.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlTabela.Location = new System.Drawing.Point(0, 0);
             this.pnlTabela.Name = "pnlTabela";
             this.pnlTabela.Size = new System.Drawing.Size(1737, 842);
             this.pnlTabela.TabIndex = 2;
             // 
-            // dataGridView1
+            // dgvIncidentes
             // 
-            this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.ButtonFace;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.dataGridView1.Location = new System.Drawing.Point(0, 191);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(1737, 651);
-            this.dataGridView1.TabIndex = 3;
+            this.dgvIncidentes.AllowUserToDeleteRows = false;
+            this.dgvIncidentes.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvIncidentes.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
+            this.dgvIncidentes.BackgroundColor = System.Drawing.SystemColors.ButtonFace;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvIncidentes.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            this.dgvIncidentes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvIncidentes.DefaultCellStyle = dataGridViewCellStyle4;
+            this.dgvIncidentes.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.dgvIncidentes.GridColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.dgvIncidentes.Location = new System.Drawing.Point(0, 191);
+            this.dgvIncidentes.MultiSelect = false;
+            this.dgvIncidentes.Name = "dgvIncidentes";
+            this.dgvIncidentes.ReadOnly = true;
+            this.dgvIncidentes.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvIncidentes.Size = new System.Drawing.Size(1737, 651);
+            this.dgvIncidentes.TabIndex = 3;
+            this.dgvIncidentes.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvIncidentes_CellClick);
+            this.dgvIncidentes.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvIncidentes_CellFormatting);
             // 
-            // textBox1
+            // txtPesquisa
             // 
-            this.textBox1.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.textBox1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox1.Location = new System.Drawing.Point(0, 0);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(1737, 38);
-            this.textBox1.TabIndex = 3;
+            this.txtPesquisa.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.txtPesquisa.Dock = System.Windows.Forms.DockStyle.Top;
+            this.txtPesquisa.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtPesquisa.Location = new System.Drawing.Point(0, 0);
+            this.txtPesquisa.Name = "txtPesquisa";
+            this.txtPesquisa.Size = new System.Drawing.Size(1737, 38);
+            this.txtPesquisa.TabIndex = 3;
+            this.txtPesquisa.TextChanged += new System.EventHandler(this.txtPesquisa_TextChanged);
             // 
             // timer1
             // 
@@ -366,6 +398,22 @@
             this.timerPiscada.Enabled = true;
             this.timerPiscada.Interval = 500;
             this.timerPiscada.Tick += new System.EventHandler(this.timerPiscada_Tick);
+            // 
+            // timerBusca
+            // 
+            this.timerBusca.Enabled = true;
+            this.timerBusca.Interval = 300;
+            this.timerBusca.Tick += new System.EventHandler(this.timerBusca_Tick);
+            // 
+            // lblRodaPe
+            // 
+            this.lblRodaPe.AutoSize = true;
+            this.lblRodaPe.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblRodaPe.Location = new System.Drawing.Point(12, 39);
+            this.lblRodaPe.Name = "lblRodaPe";
+            this.lblRodaPe.Size = new System.Drawing.Size(93, 33);
+            this.lblRodaPe.TabIndex = 0;
+            this.lblRodaPe.Text = "label4";
             // 
             // PrincipalForm
             // 
@@ -387,10 +435,12 @@
             this.panel1.PerformLayout();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.object_89736b10_0ca1_4338_a0cb_29df0ea92f76)).EndInit();
             this.pnlTabela.ResumeLayout(false);
             this.pnlTabela.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvIncidentes)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -419,9 +469,11 @@
         private System.Windows.Forms.CheckBox chkIncidentesIncendio;
         private System.Windows.Forms.CheckBox chkCamadaEstacao;
         private System.Windows.Forms.Panel pnlTabela;
-        private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.DataGridView dgvIncidentes;
+        private System.Windows.Forms.TextBox txtPesquisa;
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.Timer timerPiscada;
+        private System.Windows.Forms.Timer timerBusca;
+        private System.Windows.Forms.Label lblRodaPe;
     }
 }
