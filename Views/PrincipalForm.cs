@@ -364,5 +364,19 @@ namespace MundialDESKTOP.V1.Views
                 if (inc != null) AbrirDetalhes(inc);
             }
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                ChamadasForm f = new ChamadasForm();
+                f.Show();
+                this.Hide();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Erro: {ex.Message}");
+            }
+        }
     }
 }

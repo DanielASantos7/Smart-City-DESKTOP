@@ -60,6 +60,12 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service\ApiService.cs" />
+    <Compile Include="Views\ChamadasForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\ChamadasForm.Designer.cs">
+      <DependentUpon>ChamadasForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\DetalhesForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -82,6 +88,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="Views\ChamadasForm.resx">
+      <DependentUpon>ChamadasForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\DetalhesForm.resx">
       <DependentUpon>DetalhesForm.cs</DependentUpon>
     </EmbeddedResource>
