@@ -42,7 +42,34 @@ namespace MundialDESKTOP.V1.Service
 
                 if (!response.IsSuccessStatusCode)
                 {
-                    MessageBox.Show(JObject.Parse(json)["message"]?.ToString() ?? "Erro desconhecido", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(JObject.Parse(json)["message"]?.ToString() ??
+                        "Erro desconhecido", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return default(TResponse);
+                }
+
+                return JsonConvert.DeserializeObject<TResponse>(json);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Erro: " + ex.Message);
+                return default(TResponse);
+            }
+        }
+
+        public static async Task<TResponse> PatchAsync<TResponse>(string endpoint, object data = null)
+        {
+            try
+            {
+                var content = new StringContent(JsonConvert.SerializeObject(data), Encoding.UTF8, "application/json");
+
+                var request = new HttpRequestMessage(new HttpMethod("PATCH"), endpoint) { Content = content };
+                var response = await Http.SendAsync(request);
+                var json = await response.Content.ReadAsStringAsync();
+
+                if (!response.IsSuccessStatusCode)
+                {
+                    MessageBox.Show(JObject.Parse(json)["message"]?.ToString() ??
+                        "Erro desconhecido", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return default(TResponse);
                 }
 
