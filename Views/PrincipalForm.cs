@@ -255,15 +255,16 @@ namespace MundialDESKTOP.V1.Views
 
         private async void AbrirDetalhes(Incident inc)
         {
-            try
-            {
-                _incident = await ApiService.GetAsync<Incident>($"api/incidents/{inc.id}");
-                MessageBox.Show($"Boa, abriu detalhe certinho {inc.id}, o tipo dele é {inc.type}, o status é {inc.status}, e a descrição é {inc.description}", "Sucesso", MessageBoxButtons.OK);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Erro: {ex.Message}");
-            }
+            //try
+            //{
+            //    DetalhesForm f = new DetalhesForm(inc);
+            //    f.Show();
+            //    this.Hide();
+            //}
+            //catch (Exception ex)
+            //{
+            //    MessageBox.Show($"Erro: {ex.Message}");
+            //}
         }
 
 
