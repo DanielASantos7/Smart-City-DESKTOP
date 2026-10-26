@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.pnlPrincipal = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.chkListaUnidades = new System.Windows.Forms.CheckedListBox();
@@ -50,6 +51,7 @@
             this.lblEmergencia = new System.Windows.Forms.Label();
             this.btnSalvar = new System.Windows.Forms.Button();
             this.btnCancelar = new System.Windows.Forms.Button();
+            this.timerPolling = new System.Windows.Forms.Timer(this.components);
             this.pnlPrincipal.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -276,6 +278,10 @@
             this.btnCancelar.Text = "Cancelar";
             this.btnCancelar.UseVisualStyleBackColor = true;
             // 
+            // timerPolling
+            // 
+            this.timerPolling.Enabled = true;
+            // 
             // DetalhesForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -319,5 +325,6 @@
         private System.Windows.Forms.Button btnReconhecer;
         private System.Windows.Forms.Button btnAtribuir;
         private System.Windows.Forms.CheckedListBox chkListaUnidades;
+        private System.Windows.Forms.Timer timerPolling;
     }
 }

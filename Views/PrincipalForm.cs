@@ -256,16 +256,16 @@ namespace MundialDESKTOP.V1.Views
 
         private async void AbrirDetalhes(Incident inc)
         {
-            //try
-            //{
-            //    DetalhesForm f = new DetalhesForm(inc);
-            //    f.Show();
-            //    this.Hide();
-            //}
-            //catch (Exception ex)
-            //{
-            //    MessageBox.Show($"Erro: {ex.Message}");
-            //}
+            try
+            {
+                DetalhesForm f = new DetalhesForm(inc);
+                f.Show();
+                this.Hide();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Erro: {ex.Message}");
+            }
         }
 
 
