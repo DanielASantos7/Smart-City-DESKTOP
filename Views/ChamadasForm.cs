@@ -11,235 +11,211 @@ namespace MundialDESKTOP.V1.Views
 {
     public partial class ChamadasForm : Form
     {
-        // Guardamos a lista de chamadas vindas da API e a chamada atualmente selecionada na UI
-        private List<Call> _listaChamadas = new List<Call>();
-        private Call _chamadaSelecionada;
+        // (Armazenam os dados vindos do servidor)
+        private List<Call> _chamadas = new List<Call>(); // Lista completa vinda do Get /api/calls 
+        private Call _selecionada; // Chamada clicada no momento pelo operador
 
         public ChamadasForm()
         {
             InitializeComponent();
         }
 
-        // Evento que roda assim que o formulário é carregado na tela
-        private async void ChamadasForm_Load(object sender, EventArgs e)
+        // Carga inicial e Polling continuo da API (2000ms)
+        private async void ChamadasForm_Load(object sender, System.EventArgs e)
         {
-            // 1. Busca inicial das chamadas na API
-            await AtualizarChamadasAsync();
+            await CarregarDadosAsync();
 
-            // 2. Configura e inicia o Timer de 2 segundos (2000 ms) para polling contínuo
-            timerChamadas.Interval = 2000;
-            timerChamadas.Start();
+            timerChamada.Interval = 2000;
+            timerChamada.Start();
         }
 
-        // Evento Tick disparado automaticamente pelo Timer a cada 2 segundos
-        private async void timerChamadas_Tick(object sender, EventArgs e)
+        private async void timerChamada_Tick(object sender, EventArgs e)
         {
-            await AtualizarChamadasAsync();
+            await CarregarDadosAsync();
         }
 
-        // MÉTODO PRINCIPAL: Consulta o envelope CallsResponse da API (/api/calls) e atualiza a interface
-        public async Task AtualizarChamadasAsync()
+
+        // Método para carregar os dados da API e atualizar a interface
+        private async Task CarregarDadosAsync()
         {
             try
             {
-                // Requisita o objeto envelope contendo as chamadas
-                var respostaServer = await ApiService.GetAsync<CallsResponse>("api/calls");
-                if (respostaServer?.calls == null) return;
+                // Busca a lista envelope de chamadas da API
+                var dados = await ApiService.GetAsync<CallsResponse>("api/calls");
+                if (dados?.calls == null) return;
 
-                _listaChamadas = respostaServer.calls.ToList();
+                _chamadas = dados.calls.ToList();
 
-                // Desenha os cartões na fila da esquerda
-                RenderizarFilaChamadas();
+                // Redesenha a lista da esquerda com o estado atual da API
+                DesenharListas();
 
-                // Auto-seleciona a primeira chamada válida caso nenhuma esteja selecionada ainda
-                if (_chamadaSelecionada == null && _listaChamadas.Count > 0)
+                // Auto-Seleciona a primeira chamada se nenhuma estiver aberta
+                if (_selecionada == null && _chamadas.Count > 0)
                 {
-                    _chamadaSelecionada = _listaChamadas.FirstOrDefault(c => c.status == "ringing" || c.status == "active")
-                                          ?? _listaChamadas.First();
+                    _selecionada = _chamadas.FirstOrDefault(c => c.status == "ringing" || c.status == "active")
+                        ?? _chamadas.First();
                 }
 
-                // Mantém os detalhes da chamada selecionada atualizados
-                if (_chamadaSelecionada != null)
+                // Sincroniza a chamada selecionada com a nova versão atualizada do servidor
+                if (_selecionada != null)
                 {
-                    _chamadaSelecionada = _listaChamadas.FirstOrDefault(c => c.id == _chamadaSelecionada.id) ?? _chamadaSelecionada;
-                    ExibirDetalhesChamada(_chamadaSelecionada);
+                    _selecionada = _chamadas.FirstOrDefault(c => c.id == _selecionada.id) ?? _selecionada;
+
+                    // Atualiza o painel de detalhes direita
+                    MostrarDetalhes(_selecionada);
                 }
             }
             catch
             {
-                // Ignora falhas temporárias de rede para garantir estabilidade da tela na prova
+
             }
         }
-
-        // MÉTODO DE RENDERIZAÇÃO: Monta dinamicamente os cartões nos FlowLayoutPanels
-        private void RenderizarFilaChamadas()
+        private void DesenharListas()
         {
-            // Congela o redesenho dos painéis para evitar piscamento (flicker)
-            flpRecebidas.SuspendLayout();
-            flpRecentes.SuspendLayout();
+            flpRecebida.Controls.Clear();
+            flpRecente.Controls.Clear();
 
-            // Limpa os cartões anteriores
-            flpRecebidas.Controls.Clear();
-            flpRecentes.Controls.Clear();
-
-            foreach (var call in _listaChamadas)
+            foreach (var c in _chamadas)
             {
-                // Painel container para cada chamada
-                Panel card = new Panel
+                Label card = new Label
                 {
-                    Width = flpRecebidas.ClientSize.Width - 25,
-                    Height = 45,
+                    Text = $"{c.callerName ?? "Anônimo"}\n{c.status.ToUpper()}",
+                    Font = new Font("Segoe UI", 10, FontStyle.Bold),
+
+                    ForeColor = c.status == "ringing" ? Color.Red : Color.Black,
+                    BackColor = Color.White,
+
                     BorderStyle = BorderStyle.FixedSingle,
-                    Margin = new Padding(3),
-                    BackColor = Color.White
+
+                    Width = flpRecebida.ClientSize.Width - 25,
+                    Height = 45,
+                    Padding = new Padding(4)
                 };
 
-                // Número do telefone (trata chamadas sem número/anônimas)
-                Label lblNum = new Label
+                card.Click += (s, e) =>
                 {
-                    Text = string.IsNullOrEmpty(call.callerNumber) ? "Anônimo" : call.callerNumber,
-                    Font = new Font("Segoe UI", 9, FontStyle.Bold),
-                    Location = new Point(5, 5),
-                    AutoSize = true
+                    _selecionada = c;
+                    MostrarDetalhes(c);
                 };
 
-                // Exibição do status (Destaque em Vermelho para "RINGING")
-                Label lblStatus = new Label
-                {
-                    Text = call.status.ToUpper(),
-                    Font = new Font("Segoe UI", 8, FontStyle.Italic),
-                    ForeColor = call.status.Equals("ringing", StringComparison.OrdinalIgnoreCase) ? Color.Red : Color.Gray,
-                    Location = new Point(5, 22),
-                    AutoSize = true
-                };
-
-                card.Controls.Add(lblNum);
-                card.Controls.Add(lblStatus);
-
-                // Eventos de clique no cartão e nos rótulos internos
-                card.Click += (s, e) => SelecionarChamada(call);
-                lblNum.Click += (s, e) => SelecionarChamada(call);
-                lblStatus.Click += (s, e) => SelecionarChamada(call);
-
-                // Separação de filas conforme especificação: Ativas/Tocando vs. Encerradas/Recusadas
-                if (call.status.Equals("ringing", StringComparison.OrdinalIgnoreCase) ||
-                    call.status.Equals("active", StringComparison.OrdinalIgnoreCase))
-                {
-                    flpRecebidas.Controls.Add(card);
-                }
+                if (c.status == "ringing" || c.status == "active")
+                    flpRecebida.Controls.Add(card);
                 else
-                {
-                    flpRecentes.Controls.Add(card);
-                }
+                    flpRecente.Controls.Add(card);
             }
-
-            // Descongela e reativa o redesenho dos painéis
-            flpRecebidas.ResumeLayout();
-            flpRecentes.ResumeLayout();
         }
 
-        // Seleciona a chamada clicada e exibe seus dados no painel da direita
-        private void SelecionarChamada(Call call)
+        // Exibição de Detalhes, Cronômetro e botões
+        private void MostrarDetalhes(Call c)
         {
-            _chamadaSelecionada = call;
-            ExibirDetalhesChamada(call);
-        }
+            if (c == null) return;
 
-        // Preenche os campos de detalhes, botões e minimapa na direita
-        private void ExibirDetalhesChamada(Call call)
-        {
-            if (call == null) return;
+            lblNumeroTelefone.Text = string.IsNullOrWhiteSpace(c.callerNumber) ? "Número desconhecido" : c.callerNumber;
+            lblStatusChamada.Text = c.status.ToUpper();
+            lblNomeChamada.Text = $"Nome: {c.callerName ?? "Não informado"}";
+            lblTipoChamada.Text = $"Tipo: {c.reportedType ?? "Geral"}";
+            txtDescricao.Text = c.description ?? "Sem descrição";
 
-            lblNumeroTelefone.Text = string.IsNullOrEmpty(call.callerNumber) ? "Privado" : call.callerNumber;
-            lblNome.Text = $"Nome: {call.callerName ?? "Não informado"}";
-            lblTipo.Text = $"Tipo: {call.reportedType ?? "Geral"}";
-            lblDescricao.Text = $"Descrição: {call.description ?? "Sem descrição"}";
+            AtualizarCronometro(c);
 
-            bool isRinging = call.status.Equals("ringing", StringComparison.OrdinalIgnoreCase);
-            bool isActive = call.status.Equals("active", StringComparison.OrdinalIgnoreCase);
+            bool isRinging = (c.status == "ringing");
+            bool isActive = (c.status == "active");
 
-            // Regras do manual:
-            // - Aceitar e Recusar ativos apenas para chamadas no status 'ringing'
-            // - Encerrar ativo apenas para chamadas no status 'active'
-            btnAceitar.Enabled = isRinging;
+            bool existeChamadaAtiva = _chamadas.Any(call => call.status == "active");
+
+            btnAceitar.Enabled = isRinging && !existeChamadaAtiva;
             btnRecusar.Enabled = isRinging;
             btnEncerrar.Enabled = isActive;
+            btnVincular.Enabled = isActive;
 
-            // Desenha a marcação no minimapa
-            DesenharPontoNoMinimapa(call.location?.x ?? 0, call.location?.y ?? 0);
+
+            DesenharPontoNoMiniMapa(c.location?.x ?? 0, c.location?.y ?? 0);
         }
 
-        // DESENHO GDI+: Projeção da coordenada (1408x768) para as dimensões da PictureBox
-        private void DesenharPontoNoMinimapa(double x, double y)
+        private void AtualizarCronometro(Call c)
         {
-            if (picMinimapa.Image == null) return;
+            if (c.startedAt == default)
+            {
+                lblTimer.Text = "00:00";
+                return;
+            }
 
-            // Clona a imagem original carregada no PictureBox
-            Bitmap bmp = new Bitmap(picMinimapa.Image);
+            TimeSpan duracao = DateTime.UtcNow - c.startedAt;
+            if (duracao.TotalSeconds < 0) duracao = TimeSpan.Zero;
+
+            lblTimer.Text = duracao.ToString(@"mm\:ss");
+        }
+
+        private void DesenharPontoNoMiniMapa(double x, double y)
+        {
+            if (picMiniMapa.Image == null) return;
+
+            Bitmap bmp = new Bitmap(picMiniMapa.Image);
 
             using (Graphics g = Graphics.FromImage(bmp))
             {
-                // Regra de três simples para converter a coordenada do mapa original
-                float posX = (float)(x * picMinimapa.Width / 1408.0);
-                float posY = (float)(y * picMinimapa.Height / 768.0);
+                float px = (float)(x * picMiniMapa.Width / 1408.0);
+                float py = (float)(y * picMiniMapa.Width / 768.0);
 
-                // Desenha uma bolinha vermelha com contorno branco no ponto do chamado
-                g.FillEllipse(Brushes.Red, posX - 6, posY - 6, 12, 12);
-                g.DrawEllipse(Pens.White, posX - 6, posY - 6, 12, 12);
+                g.FillEllipse(Brushes.Red, px - 5, py - 5, 10, 10);
+                g.DrawEllipse(Pens.White, px - 5, py - 5, 10, 10);
             }
 
-            // Descarta a imagem antiga da memória para evitar vazamento de memória (Memory Leak)
-            picMinimapa.Image?.Dispose();
-            picMinimapa.Image = bmp;
+            picMiniMapa.Image?.Dispose();
+            picMiniMapa.Image = bmp;
         }
 
-        // AÇÃO ACEITAR: Dispara POST /api/calls/{id}/accept
         private async void btnAceitar_Click(object sender, EventArgs e)
         {
-            if (_chamadaSelecionada == null) return;
-
-            try
-            {
-                await ApiService.PostAsync<object>($"api/calls/{_chamadaSelecionada.id}/accept", null);
-                MessageBox.Show("Chamada aceita! Incidente gerado no sistema.", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                await AtualizarChamadasAsync();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Erro ao aceitar chamada: {ex.Message}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            if (_selecionada == null) return;
+            await ExecutarAcaoApiAsync($"api/calls/{_selecionada.id}/accept");
         }
 
-        // AÇÃO RECUSAR: Dispara POST /api/calls/{id}/reject
         private async void btnRecusar_Click(object sender, EventArgs e)
         {
-            if (_chamadaSelecionada == null) return;
+            if (_selecionada == null) return;
+            await ExecutarAcaoApiAsync($"api/calls/{_selecionada.id}/decline");
+        }
 
-            try
+        private async void btnEncerrar_Click(object sender, EventArgs e)
+        {
+            if (_selecionada == null) return;
+            await ExecutarAcaoApiAsync($"api/calls/{_selecionada.id}/end");
+        }
+
+        private async void btnVincular_Click(object sender, EventArgs e)
+        {
+            if (_selecionada == null) return;
+            string incidenteID = PrincipalForm.IncidenteSelecionadoID;
+
+            if (string.IsNullOrWhiteSpace(incidenteID))
             {
-                await ApiService.PostAsync<object>($"api/calls/{_chamadaSelecionada.id}/reject", null);
-                await AtualizarChamadasAsync();
+                MessageBox.Show("Selecione primeiro um incidente no Mapa ou na Tabela!", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
             }
-            catch (Exception ex)
+
+            var confirmacao = MessageBox.Show($"Deseja vincular esta ao Incidente #{incidenteID}",
+                "Confirmar Vinculação",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question);
+
+            if (confirmacao == DialogResult.Yes)
             {
-                MessageBox.Show($"Erro ao recusar chamada: {ex.Message}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                await ExecutarAcaoApiAsync($"api/calls/{_selecionada.id}/link", new { incidenteId = incidenteID });
             }
         }
 
-        // AÇÃO ENCERRAR: Dispara POST /api/calls/{id}/end
-        private async void btnEncerrar_Click(object sender, EventArgs e)
+        private async Task ExecutarAcaoApiAsync(string rota, object payload = null)
         {
-            if (_chamadaSelecionada == null) return;
-
             try
             {
-                await ApiService.PostAsync<object>($"api/calls/{_chamadaSelecionada.id}/end", null);
-                MessageBox.Show("Chamada encerrada com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                await AtualizarChamadasAsync();
+                await ApiService.PostAsync<object>(rota, payload);
+
+                await CarregarDadosAsync();
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Erro ao encerrar chamada: {ex.Message}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(ex.Message, "Mensagem do Servidor", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
     }

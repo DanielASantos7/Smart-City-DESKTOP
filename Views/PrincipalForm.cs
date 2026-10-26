@@ -10,6 +10,7 @@ namespace MundialDESKTOP.V1.Views
 {
     public partial class PrincipalForm : Form
     {
+        public static string IncidenteSelecionadoID { get; set; }
         private StateResponse _estadoAtual;
         private Incident _incident;
 
@@ -360,6 +361,7 @@ namespace MundialDESKTOP.V1.Views
             if (e.RowIndex >= 0 && dgvIncidentes.Rows[e.RowIndex].Cells["ID"]?.Value is string id)
             {
                 var inc = _estadoAtual.incidents.FirstOrDefault(i => i.id == id);
+                PrincipalForm.IncidenteSelecionadoID = inc.id;
 
                 if (inc != null) AbrirDetalhes(inc);
             }

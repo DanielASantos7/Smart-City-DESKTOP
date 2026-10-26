@@ -29,254 +29,239 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.lblRodaPe = new System.Windows.Forms.Label();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.panel3 = new System.Windows.Forms.Panel();
-            this.btnEncerrar = new System.Windows.Forms.Button();
-            this.btnRecusar = new System.Windows.Forms.Button();
-            this.btnAceitar = new System.Windows.Forms.Button();
-            this.lblDescricao = new System.Windows.Forms.Label();
-            this.lblTipo = new System.Windows.Forms.Label();
-            this.lblNome = new System.Windows.Forms.Label();
-            this.picMinimapa = new System.Windows.Forms.PictureBox();
-            this.lblNumeroTelefone = new System.Windows.Forms.Label();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.label3 = new System.Windows.Forms.Label();
-            this.pnlRecente = new System.Windows.Forms.Panel();
-            this.flpRecentes = new System.Windows.Forms.FlowLayoutPanel();
-            this.pnlRecebinda = new System.Windows.Forms.Panel();
-            this.flpRecebidas = new System.Windows.Forms.FlowLayoutPanel();
-            this.label2 = new System.Windows.Forms.Label();
+            this.lblEmergencia = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.timerChamadas = new System.Windows.Forms.Timer(this.components);
+            this.flpRecebida = new System.Windows.Forms.FlowLayoutPanel();
+            this.label2 = new System.Windows.Forms.Label();
+            this.flpRecente = new System.Windows.Forms.FlowLayoutPanel();
+            this.lblNumeroTelefone = new System.Windows.Forms.Label();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.lblNomeChamada = new System.Windows.Forms.Label();
+            this.lblTipoChamada = new System.Windows.Forms.Label();
+            this.txtDescricao = new System.Windows.Forms.TextBox();
+            this.picMiniMapa = new System.Windows.Forms.PictureBox();
+            this.timerChamada = new System.Windows.Forms.Timer(this.components);
+            this.lblTimer = new System.Windows.Forms.Label();
+            this.lblStatusChamada = new System.Windows.Forms.Label();
+            this.btnAceitar = new System.Windows.Forms.Button();
+            this.btnRecusar = new System.Windows.Forms.Button();
+            this.btnEncerrar = new System.Windows.Forms.Button();
+            this.btnVincular = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
-            this.panel3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.picMinimapa)).BeginInit();
-            this.panel2.SuspendLayout();
-            this.pnlRecente.SuspendLayout();
-            this.pnlRecebinda.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picMiniMapa)).BeginInit();
             this.SuspendLayout();
             // 
-            // lblRodaPe
+            // lblEmergencia
             // 
-            this.lblRodaPe.AutoSize = true;
-            this.lblRodaPe.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblRodaPe.Location = new System.Drawing.Point(102, 121);
-            this.lblRodaPe.Name = "lblRodaPe";
-            this.lblRodaPe.Size = new System.Drawing.Size(93, 33);
-            this.lblRodaPe.TabIndex = 1;
-            this.lblRodaPe.Text = "label4";
+            this.lblEmergencia.AutoSize = true;
+            this.lblEmergencia.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblEmergencia.Location = new System.Drawing.Point(24, 25);
+            this.lblEmergencia.Name = "lblEmergencia";
+            this.lblEmergencia.Size = new System.Drawing.Size(262, 33);
+            this.lblEmergencia.TabIndex = 2;
+            this.lblEmergencia.Text = "Fila de chamadas";
             // 
-            // panel1
+            // label1
             // 
-            this.panel1.Controls.Add(this.panel3);
-            this.panel1.Controls.Add(this.lblNumeroTelefone);
-            this.panel1.Controls.Add(this.panel2);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1737, 943);
-            this.panel1.TabIndex = 2;
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(24, 89);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(129, 31);
+            this.label1.TabIndex = 3;
+            this.label1.Text = "Recebida";
             // 
-            // panel3
+            // flpRecebida
             // 
-            this.panel3.Controls.Add(this.btnEncerrar);
-            this.panel3.Controls.Add(this.btnRecusar);
-            this.panel3.Controls.Add(this.btnAceitar);
-            this.panel3.Controls.Add(this.lblDescricao);
-            this.panel3.Controls.Add(this.lblTipo);
-            this.panel3.Controls.Add(this.lblNome);
-            this.panel3.Controls.Add(this.picMinimapa);
-            this.panel3.Location = new System.Drawing.Point(801, 73);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(924, 503);
-            this.panel3.TabIndex = 7;
-            // 
-            // btnEncerrar
-            // 
-            this.btnEncerrar.BackColor = System.Drawing.Color.Silver;
-            this.btnEncerrar.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnEncerrar.Location = new System.Drawing.Point(532, 452);
-            this.btnEncerrar.Name = "btnEncerrar";
-            this.btnEncerrar.Size = new System.Drawing.Size(238, 42);
-            this.btnEncerrar.TabIndex = 20;
-            this.btnEncerrar.Text = "Encerrar";
-            this.btnEncerrar.UseVisualStyleBackColor = false;
-            // 
-            // btnRecusar
-            // 
-            this.btnRecusar.BackColor = System.Drawing.Color.Red;
-            this.btnRecusar.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnRecusar.Location = new System.Drawing.Point(275, 452);
-            this.btnRecusar.Name = "btnRecusar";
-            this.btnRecusar.Size = new System.Drawing.Size(238, 42);
-            this.btnRecusar.TabIndex = 19;
-            this.btnRecusar.Text = "Recusar";
-            this.btnRecusar.UseVisualStyleBackColor = false;
-            // 
-            // btnAceitar
-            // 
-            this.btnAceitar.BackColor = System.Drawing.Color.Lime;
-            this.btnAceitar.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAceitar.Location = new System.Drawing.Point(13, 452);
-            this.btnAceitar.Name = "btnAceitar";
-            this.btnAceitar.Size = new System.Drawing.Size(238, 42);
-            this.btnAceitar.TabIndex = 18;
-            this.btnAceitar.Text = "Aceitar";
-            this.btnAceitar.UseVisualStyleBackColor = false;
-            // 
-            // lblDescricao
-            // 
-            this.lblDescricao.AutoSize = true;
-            this.lblDescricao.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDescricao.Location = new System.Drawing.Point(18, 103);
-            this.lblDescricao.Name = "lblDescricao";
-            this.lblDescricao.Size = new System.Drawing.Size(136, 31);
-            this.lblDescricao.TabIndex = 5;
-            this.lblDescricao.Text = "Descrição";
-            // 
-            // lblTipo
-            // 
-            this.lblTipo.AutoSize = true;
-            this.lblTipo.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTipo.Location = new System.Drawing.Point(18, 63);
-            this.lblTipo.Name = "lblTipo";
-            this.lblTipo.Size = new System.Drawing.Size(67, 31);
-            this.lblTipo.TabIndex = 4;
-            this.lblTipo.Text = "Tipo";
-            // 
-            // lblNome
-            // 
-            this.lblNome.AutoSize = true;
-            this.lblNome.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblNome.Location = new System.Drawing.Point(18, 17);
-            this.lblNome.Name = "lblNome";
-            this.lblNome.Size = new System.Drawing.Size(86, 31);
-            this.lblNome.TabIndex = 3;
-            this.lblNome.Text = "Nome";
-            // 
-            // picMinimapa
-            // 
-            this.picMinimapa.Image = global::MundialDESKTOP.V1.Properties.Resources.mapa;
-            this.picMinimapa.Location = new System.Drawing.Point(449, 147);
-            this.picMinimapa.Name = "picMinimapa";
-            this.picMinimapa.Size = new System.Drawing.Size(439, 217);
-            this.picMinimapa.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.picMinimapa.TabIndex = 0;
-            this.picMinimapa.TabStop = false;
-            // 
-            // lblNumeroTelefone
-            // 
-            this.lblNumeroTelefone.AutoSize = true;
-            this.lblNumeroTelefone.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblNumeroTelefone.Location = new System.Drawing.Point(796, 9);
-            this.lblNumeroTelefone.Name = "lblNumeroTelefone";
-            this.lblNumeroTelefone.Size = new System.Drawing.Size(221, 33);
-            this.lblNumeroTelefone.TabIndex = 6;
-            this.lblNumeroTelefone.Text = "+84 333 33333";
-            // 
-            // panel2
-            // 
-            this.panel2.Controls.Add(this.label3);
-            this.panel2.Controls.Add(this.pnlRecente);
-            this.panel2.Controls.Add(this.pnlRecebinda);
-            this.panel2.Controls.Add(this.label2);
-            this.panel2.Controls.Add(this.label1);
-            this.panel2.Location = new System.Drawing.Point(3, 3);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(775, 937);
-            this.panel2.TabIndex = 0;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(9, 488);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(116, 31);
-            this.label3.TabIndex = 5;
-            this.label3.Text = "Recente";
-            // 
-            // pnlRecente
-            // 
-            this.pnlRecente.Controls.Add(this.flpRecentes);
-            this.pnlRecente.Location = new System.Drawing.Point(3, 522);
-            this.pnlRecente.Name = "pnlRecente";
-            this.pnlRecente.Size = new System.Drawing.Size(765, 331);
-            this.pnlRecente.TabIndex = 4;
-            // 
-            // flpRecentes
-            // 
-            this.flpRecentes.AutoScroll = true;
-            this.flpRecentes.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.flpRecentes.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this.flpRecentes.Location = new System.Drawing.Point(0, 0);
-            this.flpRecentes.Name = "flpRecentes";
-            this.flpRecentes.Size = new System.Drawing.Size(765, 331);
-            this.flpRecentes.TabIndex = 0;
-            // 
-            // pnlRecebinda
-            // 
-            this.pnlRecebinda.Controls.Add(this.flpRecebidas);
-            this.pnlRecebinda.Location = new System.Drawing.Point(7, 103);
-            this.pnlRecebinda.Name = "pnlRecebinda";
-            this.pnlRecebinda.Size = new System.Drawing.Size(765, 331);
-            this.pnlRecebinda.TabIndex = 3;
-            // 
-            // flpRecebidas
-            // 
-            this.flpRecebidas.AutoScroll = true;
-            this.flpRecebidas.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.flpRecebidas.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this.flpRecebidas.Location = new System.Drawing.Point(0, 0);
-            this.flpRecebidas.Name = "flpRecebidas";
-            this.flpRecebidas.Size = new System.Drawing.Size(765, 331);
-            this.flpRecebidas.TabIndex = 0;
+            this.flpRecebida.Location = new System.Drawing.Point(30, 124);
+            this.flpRecebida.Name = "flpRecebida";
+            this.flpRecebida.Size = new System.Drawing.Size(569, 222);
+            this.flpRecebida.TabIndex = 4;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(9, 57);
+            this.label2.Location = new System.Drawing.Point(24, 429);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(129, 31);
-            this.label2.TabIndex = 2;
-            this.label2.Text = "Recebida";
+            this.label2.Size = new System.Drawing.Size(116, 31);
+            this.label2.TabIndex = 5;
+            this.label2.Text = "Recente";
             // 
-            // label1
+            // flpRecente
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(9, 6);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(262, 33);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "Fila de chamadas";
+            this.flpRecente.Location = new System.Drawing.Point(30, 463);
+            this.flpRecente.Name = "flpRecente";
+            this.flpRecente.Size = new System.Drawing.Size(569, 222);
+            this.flpRecente.TabIndex = 5;
             // 
-            // timerChamadas
+            // lblNumeroTelefone
             // 
-            this.timerChamadas.Enabled = true;
-            this.timerChamadas.Interval = 2000;
-            this.timerChamadas.Tick += new System.EventHandler(this.timerChamadas_Tick);
+            this.lblNumeroTelefone.AutoSize = true;
+            this.lblNumeroTelefone.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblNumeroTelefone.Location = new System.Drawing.Point(650, 25);
+            this.lblNumeroTelefone.Name = "lblNumeroTelefone";
+            this.lblNumeroTelefone.Size = new System.Drawing.Size(221, 33);
+            this.lblNumeroTelefone.TabIndex = 6;
+            this.lblNumeroTelefone.Text = "+84 333 33333";
+            // 
+            // panel1
+            // 
+            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel1.Controls.Add(this.picMiniMapa);
+            this.panel1.Controls.Add(this.txtDescricao);
+            this.panel1.Controls.Add(this.lblTipoChamada);
+            this.panel1.Controls.Add(this.lblNomeChamada);
+            this.panel1.Location = new System.Drawing.Point(655, 123);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(1051, 324);
+            this.panel1.TabIndex = 7;
+            // 
+            // lblNomeChamada
+            // 
+            this.lblNomeChamada.AutoSize = true;
+            this.lblNomeChamada.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblNomeChamada.Location = new System.Drawing.Point(17, 11);
+            this.lblNomeChamada.Name = "lblNomeChamada";
+            this.lblNomeChamada.Size = new System.Drawing.Size(97, 33);
+            this.lblNomeChamada.TabIndex = 8;
+            this.lblNomeChamada.Text = "Nome";
+            // 
+            // lblTipoChamada
+            // 
+            this.lblTipoChamada.AutoSize = true;
+            this.lblTipoChamada.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTipoChamada.Location = new System.Drawing.Point(17, 53);
+            this.lblTipoChamada.Name = "lblTipoChamada";
+            this.lblTipoChamada.Size = new System.Drawing.Size(67, 31);
+            this.lblTipoChamada.TabIndex = 8;
+            this.lblTipoChamada.Text = "Tipo";
+            // 
+            // txtDescricao
+            // 
+            this.txtDescricao.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.txtDescricao.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtDescricao.Enabled = false;
+            this.txtDescricao.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtDescricao.Location = new System.Drawing.Point(31, 101);
+            this.txtDescricao.Multiline = true;
+            this.txtDescricao.Name = "txtDescricao";
+            this.txtDescricao.ReadOnly = true;
+            this.txtDescricao.Size = new System.Drawing.Size(476, 204);
+            this.txtDescricao.TabIndex = 9;
+            this.txtDescricao.TabStop = false;
+            // 
+            // picMiniMapa
+            // 
+            this.picMiniMapa.Image = global::MundialDESKTOP.V1.Properties.Resources.mapa;
+            this.picMiniMapa.Location = new System.Drawing.Point(529, 25);
+            this.picMiniMapa.Name = "picMiniMapa";
+            this.picMiniMapa.Size = new System.Drawing.Size(504, 280);
+            this.picMiniMapa.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.picMiniMapa.TabIndex = 10;
+            this.picMiniMapa.TabStop = false;
+            // 
+            // timerChamada
+            // 
+            this.timerChamada.Enabled = true;
+            this.timerChamada.Tick += new System.EventHandler(this.timerChamada_Tick);
+            // 
+            // lblTimer
+            // 
+            this.lblTimer.AutoSize = true;
+            this.lblTimer.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTimer.Location = new System.Drawing.Point(1436, 27);
+            this.lblTimer.Name = "lblTimer";
+            this.lblTimer.Size = new System.Drawing.Size(253, 31);
+            this.lblTimer.TabIndex = 8;
+            this.lblTimer.Text = "Tempo de chamada";
+            // 
+            // lblStatusChamada
+            // 
+            this.lblStatusChamada.AutoSize = true;
+            this.lblStatusChamada.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblStatusChamada.Location = new System.Drawing.Point(659, 89);
+            this.lblStatusChamada.Name = "lblStatusChamada";
+            this.lblStatusChamada.Size = new System.Drawing.Size(571, 33);
+            this.lblStatusChamada.TabIndex = 11;
+            this.lblStatusChamada.Text = "Recebida/Ativa, Tocando, ENCERRADA";
+            // 
+            // btnAceitar
+            // 
+            this.btnAceitar.BackColor = System.Drawing.Color.Lime;
+            this.btnAceitar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAceitar.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAceitar.Location = new System.Drawing.Point(661, 466);
+            this.btnAceitar.Name = "btnAceitar";
+            this.btnAceitar.Size = new System.Drawing.Size(174, 41);
+            this.btnAceitar.TabIndex = 12;
+            this.btnAceitar.Text = "ACEITAR";
+            this.btnAceitar.UseVisualStyleBackColor = false;
+            this.btnAceitar.Click += new System.EventHandler(this.btnAceitar_Click);
+            // 
+            // btnRecusar
+            // 
+            this.btnRecusar.BackColor = System.Drawing.Color.Red;
+            this.btnRecusar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnRecusar.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnRecusar.Location = new System.Drawing.Point(841, 466);
+            this.btnRecusar.Name = "btnRecusar";
+            this.btnRecusar.Size = new System.Drawing.Size(174, 41);
+            this.btnRecusar.TabIndex = 13;
+            this.btnRecusar.Text = "RECUSAR";
+            this.btnRecusar.UseVisualStyleBackColor = false;
+            this.btnRecusar.Click += new System.EventHandler(this.btnRecusar_Click);
+            // 
+            // btnEncerrar
+            // 
+            this.btnEncerrar.BackColor = System.Drawing.Color.Gray;
+            this.btnEncerrar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnEncerrar.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnEncerrar.Location = new System.Drawing.Point(1021, 466);
+            this.btnEncerrar.Name = "btnEncerrar";
+            this.btnEncerrar.Size = new System.Drawing.Size(174, 41);
+            this.btnEncerrar.TabIndex = 14;
+            this.btnEncerrar.Text = "ENCERRAR";
+            this.btnEncerrar.UseVisualStyleBackColor = false;
+            this.btnEncerrar.Click += new System.EventHandler(this.btnEncerrar_Click);
+            // 
+            // btnVincular
+            // 
+            this.btnVincular.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.btnVincular.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnVincular.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnVincular.Location = new System.Drawing.Point(1201, 466);
+            this.btnVincular.Name = "btnVincular";
+            this.btnVincular.Size = new System.Drawing.Size(227, 41);
+            this.btnVincular.TabIndex = 15;
+            this.btnVincular.Text = "Vincular a incidente";
+            this.btnVincular.UseVisualStyleBackColor = false;
+            this.btnVincular.Click += new System.EventHandler(this.btnVincular_Click);
             // 
             // ChamadasForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1737, 943);
+            this.Controls.Add(this.btnVincular);
+            this.Controls.Add(this.btnEncerrar);
+            this.Controls.Add(this.btnRecusar);
+            this.Controls.Add(this.btnAceitar);
+            this.Controls.Add(this.lblStatusChamada);
+            this.Controls.Add(this.lblTimer);
             this.Controls.Add(this.panel1);
-            this.Controls.Add(this.lblRodaPe);
+            this.Controls.Add(this.lblNumeroTelefone);
+            this.Controls.Add(this.flpRecente);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.flpRecebida);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.lblEmergencia);
             this.Name = "ChamadasForm";
             this.Text = "ChamadasForm";
+            this.Load += new System.EventHandler(this.ChamadasForm_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            this.panel3.ResumeLayout(false);
-            this.panel3.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.picMinimapa)).EndInit();
-            this.panel2.ResumeLayout(false);
-            this.panel2.PerformLayout();
-            this.pnlRecente.ResumeLayout(false);
-            this.pnlRecebinda.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.picMiniMapa)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -284,25 +269,23 @@
 
         #endregion
 
-        private System.Windows.Forms.Label lblRodaPe;
-        private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Label lblEmergencia;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.PictureBox picMinimapa;
-        private System.Windows.Forms.Label lblNumeroTelefone;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Panel pnlRecente;
-        private System.Windows.Forms.Panel pnlRecebinda;
+        private System.Windows.Forms.FlowLayoutPanel flpRecebida;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label lblDescricao;
-        private System.Windows.Forms.Label lblTipo;
-        private System.Windows.Forms.Label lblNome;
-        private System.Windows.Forms.FlowLayoutPanel flpRecentes;
-        private System.Windows.Forms.FlowLayoutPanel flpRecebidas;
-        private System.Windows.Forms.Button btnEncerrar;
-        private System.Windows.Forms.Button btnRecusar;
+        private System.Windows.Forms.FlowLayoutPanel flpRecente;
+        private System.Windows.Forms.Label lblNumeroTelefone;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Label lblNomeChamada;
+        private System.Windows.Forms.PictureBox picMiniMapa;
+        private System.Windows.Forms.TextBox txtDescricao;
+        private System.Windows.Forms.Label lblTipoChamada;
+        private System.Windows.Forms.Timer timerChamada;
+        private System.Windows.Forms.Label lblTimer;
+        private System.Windows.Forms.Label lblStatusChamada;
         private System.Windows.Forms.Button btnAceitar;
-        private System.Windows.Forms.Timer timerChamadas;
+        private System.Windows.Forms.Button btnRecusar;
+        private System.Windows.Forms.Button btnEncerrar;
+        private System.Windows.Forms.Button btnVincular;
     }
 }
