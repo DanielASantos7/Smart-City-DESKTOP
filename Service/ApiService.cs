@@ -1,5 +1,4 @@
 ﻿using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using System;
 using System.Net.Http;
 using System.Text;
@@ -16,69 +15,39 @@ namespace MundialDESKTOP.V1.Service
             BaseAddress = new Uri("http://localhost:5215/"),
         };
 
-        public static async Task<T> GetAsync<T>(string endpoint)
+        public static void SetToken(string token)
+        {
+            Http.DefaultRequestHeaders.Remove("Authorization");
+            if (!string.IsNullOrWhiteSpace(token))
+                Http.DefaultRequestHeaders.Add("Authorization", token);
+        }
+
+        private static async Task<T> SendAsync<T>(HttpMethod method, string endpoint, object data = null)
         {
             try
             {
-                string json = await Http.GetStringAsync(endpoint);
+                var req = new HttpRequestMessage(method, endpoint);
+                if (data != null)
+                    req.Content = new StringContent(JsonConvert.SerializeObject(data), Encoding.UTF8, "application/json");
+
+                var res = await Http.SendAsync(req);
+                res.EnsureSuccessStatusCode();
+
+                var json = await res.Content.ReadAsStringAsync();
                 return JsonConvert.DeserializeObject<T>(json);
             }
             catch (Exception ex)
             {
-                System.Diagnostics.Debug.WriteLine($"[ERRO GET]: " + ex.Message);
-                return default(T);
+                MessageBox.Show("Erro" + ex.Message);
+                return default;
             }
         }
 
-        public static async Task<TResponse> PostAsync<TResponse>(string endpoint, object data = null)
-        {
-            try
-            {
-                var content = new StringContent(JsonConvert.SerializeObject(data), Encoding.UTF8, "application/json");
 
-                var response = await Http.PostAsync(endpoint, content);
-                var json = await response.Content.ReadAsStringAsync();
-
-                if (!response.IsSuccessStatusCode)
-                {
-                    MessageBox.Show(JObject.Parse(json)["message"]?.ToString() ??
-                        "Erro desconhecido", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return default(TResponse);
-                }
-
-                return JsonConvert.DeserializeObject<TResponse>(json);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Erro: " + ex.Message);
-                return default(TResponse);
-            }
-        }
-
-        public static async Task<TResponse> PatchAsync<TResponse>(string endpoint, object data = null)
-        {
-            try
-            {
-                var content = new StringContent(JsonConvert.SerializeObject(data), Encoding.UTF8, "application/json");
-
-                var request = new HttpRequestMessage(new HttpMethod("PATCH"), endpoint) { Content = content };
-                var response = await Http.SendAsync(request);
-                var json = await response.Content.ReadAsStringAsync();
-
-                if (!response.IsSuccessStatusCode)
-                {
-                    MessageBox.Show(JObject.Parse(json)["message"]?.ToString() ??
-                        "Erro desconhecido", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return default(TResponse);
-                }
-
-                return JsonConvert.DeserializeObject<TResponse>(json);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Erro: " + ex.Message);
-                return default(TResponse);
-            }
-        }
+        public static Task<T> GetTAsync<T>(string endpoint) => SendAsync<T>(HttpMethod.Get, endpoint);
+        public static Task<T> PostAsync<T>(string endpoint, object data = null) => SendAsync<T>(HttpMethod.Post, endpoint, data);
+        public static Task<T> PutAsync<T>(string endpoint, object data = null) => SendAsync<T>(HttpMethod.Put, endpoint, data);
+        public static Task<T> PatchAsync<T>(string endpoint, object data = null) => SendAsync<T>(new HttpMethod("PATCH"), endpoint, data);
+        public static Task DeleteAsync(string endpoint, object data = null) => SendAsync<object>(HttpMethod.Delete, endpoint, data);
     }
 }
